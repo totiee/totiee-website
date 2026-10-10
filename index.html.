@@ -1,1 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090511">
+<title>Totiee 💜 | My Gaming World</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Permanent+Marker&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #090511;
+  --purple: #c66cff;
+  --light: #e0a4ff;
+  --text: #f7edff;
+  --muted: #c6b6d7;
+  --line: #b026ff66;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  font-family: Inter, sans-serif;
+  background: var(--bg);
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  background:
+    linear-gradient(180deg, rgba(9,5,17,.66), rgba(9,5,17,.91)),
+    url("https://plain-apac-prod-public.komododecks.com/202610/09/x81TNQ10yl8BNueqlKzb/image.jpg")
+    center / cover no-repeat;
+  transform: scale(1.02);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: -20%;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 15% 20%, #8e35d644, transparent 40%),
+    radial-gradient(ellipse at 85% 70%, #d54cff22, transparent 40%);
+  animation: aurora 14s ease-in-out infinite alternate;
+}
+
+a { color: inherit; }
+
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 6%;
+  background: #100918df;
+  border-bottom: 1px solid var(--line);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.logo {
+  font: 30px 'Permanent Marker', cursive;
+  color: var(--light);
+  text-decoration: none;
+  text-shadow: 0 0 22px #bd4cff77;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-links a {
+  padding: 10px 17px;
+  border-radius: 30px;
+  color: #eadcf7;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+  border: 1px solid transparent;
+  transition: .3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  background: #a33be82c;
+  border-color: #c66cff88;
+  box-shadow: 0 0 20px #b54dff22;
+}
+
+.hero {
+  min-height: 460px;
+  padding: 55px 20px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  animation: fadeIn 1s ease both;
+}
+
+.hero-inner { max-width: 760px; }
+
+.hero-avatar {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--light);
+  background: #251036;
+  box-shadow: 0 0 0 8px #bc5aff0d, 0 0 40px #b14cff88;
+  animation: float 5s ease-in-out infinite;
+}
+
+.eyebrow {
+  margin-top: 25px;
+  color: var(--light);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 8px 0;
+  font: clamp(55px, 10vw, 90px)/1.1 'Permanent Marker', cursive;
+  color: #e5baff;
+  text-shadow: 0 0 30px #a855f799;
+}
+
+.hero p {
+  color: #d8c8e6;
+  line-height: 1.8;
+  font-size: 15px;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 9px;
+  margin-top: 20px;
+}
+
+.tag {
+  padding: 9px 14px;
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  background: #8b2bc51b;
+  font-size: 12px;
+}
+
+.container {
+  width: min(1080px, 100%);
+  margin: auto;
+  padding: 15px 22px 65px;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.section-heading h2 {
+  margin: 0;
+  font: 30px 'Permanent Marker', cursive;
+  color: var(--light);
+}
+
+.section-heading p {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.card {
+  position: relative;
+  min-width: 0;
+  padding: 23px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: linear-gradient(145deg, #1a0e28ed, #0c0815ed);
+  box-shadow: 0 12px 35px #00000025;
+  transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(circle at top left, #bd5bff22, transparent 60%);
+  transition: opacity .35s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: #cf83ff;
+  box-shadow: 0 18px 40px #00000044, 0 0 25px #9e39df22;
+}
+
+.card:hover::before { opacity: 1; }
+
+.card h3 {
+  position: relative;
+  margin: 0 0 18px;
+  font: 25px 'Permanent Marker', cursive;
+  color: var(--light);
+}
+
+.profile-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  min-width: 0;
+  padding: 13px;
+  border: 1px solid #8652a255;
+  border-radius: 15px;
+  background: #090610bb;
+  text-decoration: none;
+  transition: .3s ease;
+}
+
+.profile-link:hover {
+  background: #281439;
+  border-color: var(--purple);
+  transform: translateX(3px);
+}
+
+.profile-pic {
+  width: 92px;
+  height: 92px;
+  flex-shrink: 0;
+  object-fit: cover;
+  border: 2px solid var(--light);
+  border-radius: 50%;
+  background: #251036;
+  box-shadow: 0 0 17px #a855f744;
+}
+
+.profile-info {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.profile-info strong {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 16px;
+}
+
+.profile-info small {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.btn {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 17px;
+  margin-top: 14px;
+  border: 1px solid #e2a4ff88;
+  border-radius: 30px;
+  background: linear-gradient(110deg, #7729bb, #bd39c9);
+  color: white;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 800;
+  box-shadow: 0 5px 22px #9c3bcb33;
+  transition: .25s ease;
+}
+
+.btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  filter: brightness(1.15);
+  box-shadow: 0 8px 25px #b04ce766;
+}
+
+.about-item {
+  position: relative;
+  margin-top: 12px;
+  padding: 13px 15px;
+  border-left: 2px solid var(--purple);
+  border-radius: 0 10px 10px 0;
+  background: #0b071277;
+}
+
+.about-item p {
+  margin: 0;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+  font-size: 14px;
+}
+
+.about-item strong { color: var(--light); }
+
+.playlist {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  min-width: 0;
+  padding: 13px;
+  border: 1px solid #8652a255;
+  border-radius: 15px;
+  background: #090610bb;
+}
+
+.album {
+  width: 110px;
+  height: 110px;
+  flex-shrink: 0;
+  object-fit: cover;
+  border: 1px solid var(--purple);
+  border-radius: 13px;
+  background: #251036;
+  box-shadow: 0 0 18px #a855f733;
+}
+
+.playlist-info {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.playlist-info strong {
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* WORK VIEW */
+
+#work-view {
+  display: none;
+  animation: pageIn .5s ease both;
+}
+
+.work-empty {
+  min-height: 280px;
+  display: grid;
+  place-items: center;
+  padding: 30px;
+  text-align: center;
+  border: 1px dashed #bc67f588;
+  border-radius: 20px;
+  background: #130b20d9;
+}
+
+.work-symbol {
+  font-size: 45px;
+  color: var(--light);
+  text-shadow: 0 0 25px #b84cff99;
+  animation: pulse 3s ease-in-out infinite;
+}
+
+.work-empty h3 {
+  margin: 15px 0 8px;
+  font: 28px 'Permanent Marker', cursive;
+  color: var(--light);
+}
+
+.work-empty p {
+  max-width: 440px;
+  margin: auto;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+/* DOWNLOADABLE FILE LIBRARY */
+
+.file-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.file-card {
+  position: relative;
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: linear-gradient(145deg, #1a0e28ed, #0c0815ed);
+  transition: .3s ease;
+}
+
+.file-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--light);
+  box-shadow: 0 0 25px #b54dff22;
+}
+
+.file-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.file-icon {
+  width: 55px;
+  height: 55px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #8b2bc522;
+  font-size: 27px;
+}
+
+.file-details {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.file-details h3 {
+  margin: 0 0 7px;
+  color: var(--light);
+  font-size: 17px;
+}
+
+.file-details p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.file-download {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  margin-top: 18px;
+  padding: 12px;
+  border: 1px solid #e2a4ff88;
+  border-radius: 30px;
+  background: linear-gradient(110deg, #7729bb, #bd39c9);
+  color: white;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 800;
+  transition: .25s ease;
+}
+
+.file-download:hover {
+  filter: brightness(1.2);
+  transform: translateY(-2px);
+}
+
+footer {
+  margin-top: 25px;
+  padding: 30px 15px;
+  border-top: 1px solid #a855f755;
+  color: var(--light);
+  text-align: center;
+  font-size: 12px;
+}
+
+footer p { margin: 8px; }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(25px) scale(.985);
+  transition: opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1);
+}
+
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-10px) rotate(1deg); }
+}
+
+@keyframes aurora {
+  from { transform: translate(-1%, 0) rotate(0); }
+  to { transform: translate(1%, 2%) rotate(5deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+@media(max-width: 650px) {
+  nav { padding: 12px 16px; }
+
+  .logo { font-size: 27px; }
+
+  .nav-links {
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .nav-links a {
+    padding: 9px 13px;
+    font-size: 12px;
+  }
+
+  .hero {
+    min-height: 420px;
+    padding: 45px 17px;
+  }
+
+  .hero-avatar {
+    width: 125px;
+    height: 125px;
+  }
+
+  .hero p { font-size: 14px; }
+
+  .container { padding: 8px 15px 45px; }
+
+  .grid, .file-list {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .card { padding: 18px; }
+
+  .card h3 { font-size: 23px; }
+
+  .profile-pic {
+    width: 78px;
+    height: 78px;
+  }
+
+  .album {
+    width: 88px;
+    height: 94px;
+  }
+}
+
+@media(prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+
+<nav>
+  <div class="nav-links">
+    <a href="#home" id="home-tab" class="active"
+       onclick="showView('home'); return false;">
+      Home
+    </a>
+
+    <a href="#work" id="work-tab"
+       onclick="showView('work'); return false;">
+      Work
+    </a>
+  </div>
+</nav>
+
+<!-- HOME HERO -->
+
+<header class="hero" id="hero">
+  <div class="hero-inner">
+
+    <img
+      class="hero-avatar"
+      src="https://plain-apac-prod-public.komododecks.com/202610/09/9wZlau0lZvSSphHtQ30k/image.jpg"
+      alt="Totiee main profile picture"
+    >
+
+    <h1>Totiee</h1>
+
+    <p>“I don't chase attention. I create my own world.”</p>
+
+    <div class="tags">
+      <span class="tag">♟️ Chess player</span>
+      <span class="tag">⚀ Roblox player</span>
+      <span class="tag">♫ Music lover</span>
+    </div>
+
+  </div>
+</header>
+
+<main class="container">
+
+  <!-- HOME VIEW -->
+
+  <div id="home-view">
+
+    <div class="section-heading">
+      <h2>Social</h2>
+    </div>
+
+    <div class="grid">
+
+      <!-- TIKTOK -->
+
+      <section class="card reveal">
+        <h3>TikTok</h3>
+
+        <a class="profile-link"
+           href="https://www.tiktok.com/@xyzzzzzzzzzzzzzzzzzzzz4"
+           target="_blank"
+           rel="noopener noreferrer">
+
+          <img
+            class="profile-pic"
+            src="https://plain-apac-prod-public.komododecks.com/202610/09/p1og00liUVVYn4jU4LpQ/image.jpg"
+            alt="TikTok picture"
+          >
+
+          <span class="profile-info">
+            <strong>TikTok ↗</strong>
+            <small>@xyzzzzzzzzzzzzzzzzzzzz4</small>
+          </span>
+        </a>
+
+        <a class="btn"
+           href="https://www.tiktok.com/@xyzzzzzzzzzzzzzzzzzzzz4"
+           target="_blank"
+           rel="noopener noreferrer">
+          Visit TikTok ↗
+        </a>
+      </section>
+
+      <!-- ROBLOX -->
+
+      <section class="card reveal">
+        <h3>Roblox</h3>
+
+        <a class="profile-link"
+           href="https://www.roblox.com/share?code=76d9ee0e7b966a488140c20e33b86075&amp;type=Profile&amp;source=ProfileShare&amp;stamp=1791545928701"
+           target="_blank"
+           rel="noopener noreferrer">
+
+          <img
+            class="profile-pic"
+            src="https://plain-apac-prod-public.komododecks.com/202610/09/5J5DeyU3tGAOyq7tfGId/image.jpg"
+            alt="Roblox picture"
+          >
+
+          <span class="profile-info">
+            <strong>Roblox ↗</strong>
+            <small>View my Roblox profile</small>
+          </span>
+        </a>
+
+        <a class="btn"
+           href="https://www.roblox.com/share?code=76d9ee0e7b966a488140c20e33b86075&amp;type=Profile&amp;source=ProfileShare&amp;stamp=1791545928701"
+           target="_blank"
+           rel="noopener noreferrer">
+          Visit Roblox ↗
+        </a>
+      </section>
+
+      <!-- DISCORD PROFILE -->
+
+      <section class="card reveal">
+        <h3>Discord</h3>
+
+        <a class="profile-link"
+           href="https://discord.com/users/1370316914215227454"
+           target="_blank"
+           rel="noopener noreferrer">
+
+          <img
+            class="profile-pic"
+            src="https://plain-apac-prod-public.komododecks.com/202610/09/7xFYftKFs9LbguQinXsy/image.jpg"
+            alt="Discord profile picture"
+          >
+
+          <span class="profile-info">
+            <strong>Discord ↗</strong>
+            <small>Open my Discord profile</small>
+          </span>
+        </a>
+
+        <!-- DOWNLOAD BUTTON: MEDIAFIRE -->
+
+        <a class="btn"
+           href="https://www.mediafire.com/file/51vsnpupy1z2g2r/totie.ahk/file"
+           target="_blank"
+           rel="noopener noreferrer">
+          Download ↗
+        </a>
+      </section>
+
+      <!-- ABOUT ME -->
+
+      <section class="card reveal">
+        <h3>About Me</h3>
+
+        <div class="about-item">
+          <p><strong>Name</strong><br>Totiee</p>
+        </div>
+
+        <div class="about-item">
+          <p><strong>Age</strong><br>∞</p>
+        </div>
+
+        <div class="about-item">
+          <p><strong>Location</strong><br>Philippines</p>
+        </div>
+
+        <div class="about-item">
+          <p><strong>Hobbies</strong><br>Gaming, coding, chess</p>
+        </div>
+      </section>
+
+      <!-- SPOTIFY -->
+
+      <section class="card reveal">
+        <h3>Fav Playlist</h3>
+
+        <div class="playlist">
+
+          <img
+            class="album"
+            src="https://plain-apac-prod-public.komododecks.com/202610/09/lfVagddL3piaAH5Wjxe8/image.jpg"
+            alt="Spotify playlist cover"
+          >
+
+          <div class="playlist-info">
+            <strong>Spotify Playlist</strong>
+
+            <small style="color:var(--muted)">
+              “One song, a thousand dirty thoughts.”
+            </small>
+
+            <a class="btn"
+               href="https://open.spotify.com/playlist/06V6ehZfHj5i0BE8kxZuBW?si=UAK3Gv_tRUG7rrFkgkmODA"
+               target="_blank"
+               rel="noopener noreferrer">
+              Listen on Spotify ↗
+            </a>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- WORK VIEW: DOWNLOADABLE FILE LIBRARY -->
+
+  <section id="work-view">
+
+    <div class="section-heading">
+      <h2>My Files</h2>
+      <p>My creations</p>
+    </div>
+
+    <p style="color:var(--muted); font-size:13px; line-height:1.8; margin-bottom:22px;">
+      
+    </p>
+
+    <div class="file-list">
+
+      <article class="file-card reveal">
+        <div class="file-top">
+          <div class="file-icon">🔫</div>
+
+          <div class="file-details">
+            <h3>totie.ahk</h3>
+            <p>MACRO</p>
+            <p></p>
+          </div>
+        </div>
+
+        <a class="file-download"
+           href="https://www.mediafire.com/file/51vsnpupy1z2g2r/totie.ahk/file"
+           target="_blank"
+           rel="noopener noreferrer">
+          ↓ Download ↗
+        </a>
+      </article>
+
+    </div>
+
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+
+<footer>
+  <p></p>
+  <p><span id="year"></span></p>
+  <p>Gawang bahay</p>
+</footer>
+
+<script>
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+
+/* HOME / WORK NAVIGATION */
+
+function showView(view) {
+  const isHome = view === "home";
+
+  document.getElementById("home-view").style.display =
+    isHome ? "block" : "none";
+
+  document.getElementById("work-view").style.display =
+    isHome ? "none" : "block";
+
+  document.getElementById("hero").style.display =
+    isHome ? "grid" : "none";
+
+  document.getElementById("home-tab").classList.toggle(
+    "active", isHome
+  );
+
+  document.getElementById("work-tab").classList.toggle(
+    "active", !isHome
+  );
+
+  history.replaceState(
+    null,
+    "",
+    isHome ? "#home" : "#work"
+  );
+
+  window.scrollTo({
+    top: 0,
+    behavior: window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches ? "auto" : "smooth"
+  });
+
+  if (isHome) {
+    document.querySelectorAll(".reveal").forEach(card => {
+      card.classList.remove("show");
+      observer.observe(card);
+    });
+  }
+}
+
+/* SCROLL REVEAL ANIMATION */
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach((entry, index) => {
+    if (entry.isIntersecting) {
+      entry.target.style.transitionDelay =
+        Math.min(index * 80, 240) + "ms";
+
+      entry.target.classList.add("show");
+      observer.unobserve(entry.target);
+    }
+  });
+}, {
+  threshold: 0.12
+});
+
+document.querySelectorAll(".reveal").forEach(card => {
+  observer.observe(card);
+});
+
+/* OPEN WORK WHEN URL ENDS WITH #work */
+
+if (window.location.hash === "#work") {
+  showView("work");
+}
+</script>
+
+</body>
+</html>
